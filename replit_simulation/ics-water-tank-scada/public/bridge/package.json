@@ -1,0 +1,15 @@
+{
+  "name": "ics-tank-gateway",
+  "version": "1.0.0",
+  "description": "VMware bridge: connects Replit SCADA to local Modbus TCP, MQTT, REST, SQL Server, Elasticsearch",
+  "main": "gateway.js",
+  "scripts": {
+    "start": "node gateway.js"
+  },
+  "dependencies": {
+    "aedes": "^0.51.3",
+    "ws": "^8.18.0",
+    "mssql": "^11.0.1"
+  },
+  "engines": { "node": ">=18.0.0" }
+}

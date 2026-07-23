@@ -1,0 +1,129 @@
+{
+  "_comment": "Ignition SCADA — Tag configuration for ICS Water Tank TK-001",
+  "_instructions": [
+    "1. In Ignition Designer: Tags → Import Tags → select this file",
+    "2. Or use Ignition's Modbus TCP driver pointing to localhost:502 (via bridge.js) or the Replit server's Modbus TCP",
+    "3. REST tags use the Ignition HTTP connector pointing to http://localhost:8080 (via bridge.js)"
+  ],
+  "tagGroup": {
+    "name": "WaterTank_TK001",
+    "typeId": "UDT_WaterTank",
+    "tags": [
+      {
+        "name": "TankLevel",
+        "tagType": "OpcTag",
+        "dataType": "Float4",
+        "opcServer": "Ignition OPC-UA Server",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.HR0",
+        "engineeringUnits": "%",
+        "lowLimit": 0, "highLimit": 100,
+        "alarms": [
+          { "name": "LowLevel",  "mode": "AboveBelow", "setpointA": 10, "priority": "High",    "label": "Tank Low Level < 10%" },
+          { "name": "HighLevel", "mode": "AboveBelow", "setpointA": 90, "setpointAMode": "Above", "priority": "High", "label": "Tank High Level > 90%" },
+          { "name": "HH",        "mode": "AboveBelow", "setpointA": 95, "setpointAMode": "Above", "priority": "Critical", "label": "Tank HH Interlock >= 95%" }
+        ],
+        "_modbusAddr": "HR 40001  (Unit 1, Address 0, Scale ÷100)"
+      },
+      {
+        "name": "Setpoint",
+        "tagType": "OpcTag",
+        "dataType": "Float4",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.HR1",
+        "engineeringUnits": "%",
+        "readOnly": false,
+        "_modbusAddr": "HR 40002  (Unit 1, Address 1, Scale ÷100)"
+      },
+      {
+        "name": "Pressure",
+        "tagType": "OpcTag",
+        "dataType": "Float4",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.HR3",
+        "engineeringUnits": "bar",
+        "_modbusAddr": "HR 40004  (Unit 1, Address 3, Scale ÷1000)"
+      },
+      {
+        "name": "Temperature",
+        "tagType": "OpcTag",
+        "dataType": "Float4",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.HR4",
+        "engineeringUnits": "°C",
+        "_modbusAddr": "HR 40005  (Unit 1, Address 4, Scale ÷10)"
+      },
+      {
+        "name": "FillPump",
+        "tagType": "OpcTag",
+        "dataType": "Boolean",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.C0",
+        "_modbusAddr": "Coil 00001  (Unit 1, Address 0)"
+      },
+      {
+        "name": "DrainValve",
+        "tagType": "OpcTag",
+        "dataType": "Boolean",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.C1",
+        "_modbusAddr": "Coil 00002  (Unit 1, Address 1)"
+      },
+      {
+        "name": "AlarmLowLevel",
+        "tagType": "OpcTag",
+        "dataType": "Boolean",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.C2",
+        "_modbusAddr": "Coil 00003  (Unit 1, Address 2)"
+      },
+      {
+        "name": "AlarmHighLevel",
+        "tagType": "OpcTag",
+        "dataType": "Boolean",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.C3",
+        "_modbusAddr": "Coil 00004  (Unit 1, Address 3)"
+      },
+      {
+        "name": "AutoModeOutput",
+        "tagType": "OpcTag",
+        "dataType": "Boolean",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.C4",
+        "_modbusAddr": "Coil 00005  (Unit 1, Address 4)"
+      },
+      {
+        "name": "CmdAutoMode",
+        "tagType": "OpcTag",
+        "dataType": "Boolean",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.C8",
+        "readOnly": false,
+        "_modbusAddr": "Coil 00009  (Unit 1, Address 8)"
+      },
+      {
+        "name": "CmdPumpManual",
+        "tagType": "OpcTag",
+        "dataType": "Boolean",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.C9",
+        "readOnly": false,
+        "_modbusAddr": "Coil 00010  (Unit 1, Address 9)"
+      },
+      {
+        "name": "CmdDrainManual",
+        "tagType": "OpcTag",
+        "dataType": "Boolean",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.C10",
+        "readOnly": false,
+        "_modbusAddr": "Coil 00011  (Unit 1, Address 10)"
+      },
+      {
+        "name": "EStop",
+        "tagType": "OpcTag",
+        "dataType": "Boolean",
+        "opcItemPath": "ns=1;s=[ModbusTCP]TK001.C12",
+        "readOnly": false,
+        "_modbusAddr": "Coil 00013  (Unit 1, Address 12)"
+      }
+    ]
+  },
+  "modbusDriverConfig": {
+    "driverType": "ModbusRtuOverTcp",
+    "hostname": "localhost",
+    "port": 502,
+    "unitId": 1,
+    "scanClass": "Default",
+    "reverseWordOrder": false
+  }
+}

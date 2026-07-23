@@ -1,0 +1,10 @@
+# Node dependencies & logs
+node_modules/
+npm-debug.log
+*.log
+
+# Environment variables
+.env
+
+# Large archives (Optional: remove comment if archive is >100MB)
+# *.tar.gz

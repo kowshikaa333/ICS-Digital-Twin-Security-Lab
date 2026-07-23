@@ -1,0 +1,41 @@
+=== ICS Water Tank Gateway ===
+SCADA WebSocket : wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+Modbus TCP      : 0.0.0.0:502  (Unit ID 1)
+MQTT Broker     : 0.0.0.0:1884
+REST Proxy      : http://0.0.0.0:8081
+Elasticsearch   : (disabled)
+SQL Server      : (disabled)
+
+[MQTT] Broker listening on port 1884
+[Modbus] TCP server listening on port 502 (Unit ID 1)
+[HTTP] REST proxy on port 8081
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s
+[WS] Connecting to SCADA server: wss://57571c90-82d6-4797-9571-c99625be428d-00-2fpk3zoqyth05.janeway.replit.dev/api/tank/ws
+[WS] Disconnected — reconnecting in 3s

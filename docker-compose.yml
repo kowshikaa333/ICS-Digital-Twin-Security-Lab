@@ -1,0 +1,281 @@
+version: "3.9"
+
+networks:
+  iot-net:
+    driver: bridge
+
+services:
+
+  # =====================
+  # OpenPLC (x4)
+  # =====================
+  openplc1:
+    image:  openplc_v3:latest
+    pull_policy: never
+    container_name: openplc1
+    ports:
+      - "8081:8080"   # Web UI
+      - "5021:502"    # Modbus TCP
+    networks: [iot-net]
+    restart: unless-stopped
+
+  openplc2:
+    image:  openplc_v3:latest
+    pull_policy: never
+    container_name: openplc2
+    ports:
+      - "8082:8080"
+      - "5022:502"
+    networks: [iot-net]
+    restart: unless-stopped
+
+  openplc3:
+    image:  openplc_v3:latest
+    pull_policy: never
+    container_name: openplc3
+    ports:
+      - "8083:8080"
+      - "5023:502"
+    networks: [iot-net]
+    restart: unless-stopped
+
+  openplc4:
+    image:  openplc_v3:latest
+    pull_policy: never
+    container_name: openplc4
+    ports:
+      - "8084:8080"
+      - "5024:502"
+    networks: [iot-net]
+    restart: unless-stopped
+
+  # =====================
+  # OPC UA Server
+  # =====================
+  opcua:
+    image: mcr.microsoft.com/iotedge/opc-plc
+    container_name: opcua
+    hostname: opcua
+    command: >
+      --pn=50000
+      --unsecuretransport
+      --autoaccept
+      --sph
+    ports:
+      - "50000:50000"
+    networks: [iot-net]
+    restart: unless-stopped
+
+  # =====================
+  # Ignition SCADA
+  # =====================
+  ignition:
+    image: inductiveautomation/ignition
+    container_name: ignition
+    ports:
+      - "8088:8088"
+      - "8043:8043"
+    volumes:
+      - ignition-data:/usr/local/bin/ignition/data
+    networks: [iot-net]
+
+  # =====================
+  # Eclipse Ditto (Jumeau numérique)
+  # =====================
+#  ditto:
+   # image: eclipse/ditto:3
+#    container_name: ditto
+#    ports:
+#      - "8085:8080"
+#    networks: [iot-net]
+
+  # =====================
+  # Eclipse Ditto (Microservices)
+  # =====================
+  ditto-mongo:
+    image: mongo:7.0
+    container_name: ditto-mongo
+    networks:
+      iot-net:
+        aliases:
+          - mongodb
+    restart: unless-stopped
+    volumes:
+      - ditto-mongo-data:/data/db
+
+  ditto-policies:
+    image: eclipse/ditto-policies:latest
+    container_name: ditto-policies
+    depends_on: [ditto-mongo]
+    environment:
+      - BIND_HOSTNAME=0.0.0.0
+      - MONGO_DB_HOSTNAME=mongodb
+    networks:
+      iot-net:
+        aliases:
+          - ditto-cluster
+    restart: unless-stopped
+
+  ditto-things:
+    image: eclipse/ditto-things:latest
+    container_name: ditto-things
+    depends_on: [ditto-policies]
+    environment:
+      - BIND_HOSTNAME=0.0.0.0
+      - MONGO_DB_HOSTNAME=mongodb
+    networks:
+      iot-net:
+        aliases:
+          - ditto-cluster
+    restart: unless-stopped
+
+
+  ditto-connectivity:
+    image: eclipse/ditto-connectivity:latest
+    container_name: ditto-connectivity
+    depends_on: [ditto-things]
+    environment:
+      - BIND_HOSTNAME=0.0.0.0
+      - MONGO_DB_HOSTNAME=mongodb
+    networks:
+      iot-net:
+        aliases:
+          - ditto-cluster
+    restart: unless-stopped
+
+  ditto-things-search:
+    image: eclipse/ditto-things-search:latest
+    container_name: ditto-things-search
+    depends_on: [ditto-things]
+    environment:
+      - BIND_HOSTNAME=0.0.0.0
+      - MONGO_DB_HOSTNAME=mongodb
+    networks:
+      iot-net:
+        aliases:
+          - ditto-cluster
+    restart: unless-stopped
+
+  ditto-ui:
+    image: eclipse/ditto-ui:latest
+    container_name: ditto-ui
+    depends_on:
+      - ditto-gateway
+    networks: [iot-net]
+    restart: unless-stopped
+
+
+  ditto-nginx:
+    image: nginx:1.27-alpine
+    container_name: ditto-nginx
+    depends_on:
+      - ditto-gateway
+    ports:
+      - "8085:80"
+    volumes:
+      - /home/armand/ditto-nginx.conf:/etc/nginx/nginx.conf:ro
+      - /home/armand/ditto.htpasswd:/etc/nginx/ditto.htpasswd:ro
+    networks: [iot-net]
+    restart: unless-stopped
+
+
+  ditto-gateway:
+    image: eclipse/ditto-gateway:latest
+    container_name: ditto-gateway
+    depends_on: [ditto-policies]
+    environment:
+      - BIND_HOSTNAME=0.0.0.0
+      - ENABLE_PRE_AUTHENTICATION=true
+      - MONGO_DB_HOSTNAME=mongodb
+#    ports:
+#      - "8086:8080"
+    networks:
+      iot-net:
+        aliases:
+          - ditto-cluster
+    restart: unless-stopped
+
+
+
+
+  # =====================
+  # Node-RED
+  # =====================
+  nodered:
+    image: nodered/node-red
+    container_name: nodered
+    ports:
+      - "1880:1880"
+    volumes:
+      - nodered-data:/data
+    networks: [iot-net]
+
+
+  # =====================
+  # Service SQL Express
+  # =====================
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    restart: unless-stopped
+    user: "0:0"
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+      MSSQL_SA_PASSWORD: "Ignition!2026SQL"
+
+    ports:
+      - "1433:1433"
+    volumes:
+      - /home/armand/sql/data:/var/opt/mssql
+      - /home/armand/sql/system:/.system
+     # - /home/armand/mssql-logs:/var/opt/mssql/log
+    networks:
+      - iot-net
+
+    healthcheck:
+      test: ["CMD-SHELL", "bash -lc '</dev/tcp/127.0.0.1/1433'"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 90s
+
+
+
+
+  # =====================
+  # sql-init (run once)
+  # =====================
+
+  sql-init:
+    image: mcr.microsoft.com/mssql-tools
+    container_name: sql-init
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD}"
+    volumes:
+      - /home/armand/sql/init.sql:/init.sql:ro
+    networks:
+      - iot-net
+    entrypoint: ["bash","-lc"]
+
+    command: >
+      "echo 'Waiting for SQL...';
+      for i in {1..60}; do
+        /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P \"$${MSSQL_SA_PASSWORD}\" -Q \"SELECT 1\" && break;
+        echo '...not ready yet'; sleep 2;
+      done;
+      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P \"$${MSSQL_SA_PASSWORD}\" -i /init.sql
+      && echo 'SQL init done'"
+
+
+    restart: "no"
+
+
+volumes:
+  ignition-data:
+  nodered-data:
+  ditto-mongo-data:
+  sql_data:

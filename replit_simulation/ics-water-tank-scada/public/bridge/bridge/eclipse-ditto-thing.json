@@ -1,0 +1,86 @@
+{
+  "_comment": "Eclipse Ditto — Digital Twin definition for ICS Water Tank TK-001",
+  "thingId": "ics:water-tank-TK-001",
+  "policyId": "ics:water-tank-policy",
+  "definition": "ics:WaterTank:1.0.0",
+  "attributes": {
+    "manufacturer": "ICS SCADA Platform",
+    "model": "TK-001",
+    "program": "CuveRegulationAvancee",
+    "standard": "IEC 61131-3 ST",
+    "location": "Plant Floor - Zone A",
+    "modbusUnitId": 1,
+    "tankHeight_m": 3.0,
+    "tankCapacity_L": 12000
+  },
+  "features": {
+    "sensors": {
+      "definition": ["ics:LevelSensor:1.0"],
+      "properties": {
+        "status": {
+          "tankLevel": 53.0,
+          "pressure_bar": 0.156,
+          "temperature_C": 18.0,
+          "lowSensor": false,
+          "highSensor": false
+        }
+      }
+    },
+    "actuators": {
+      "definition": ["ics:Actuator:1.0"],
+      "properties": {
+        "status": {
+          "fillPump": false,
+          "drainValve": false,
+          "autoModeOutput": false
+        }
+      }
+    },
+    "alarms": {
+      "definition": ["ics:Alarm:1.0"],
+      "properties": {
+        "status": {
+          "alarmLowLevel": false,
+          "alarmHighLevel": false,
+          "interlockHighHigh": false,
+          "interlockLowLow": false,
+          "interlockDualCommand": false
+        }
+      }
+    },
+    "setpoints": {
+      "definition": ["ics:Setpoint:1.0"],
+      "properties": {
+        "desired": {
+          "setpoint": 60.0,
+          "deadBand": 3.0,
+          "mode": "manual"
+        }
+      }
+    }
+  },
+  "_policy": {
+    "policyId": "ics:water-tank-policy",
+    "entries": {
+      "owner": {
+        "subjects": { "nginx:operator": { "type": "nginx-basic-auth" } },
+        "resources": {
+          "thing:/": { "grant": ["READ","WRITE"], "revoke": [] },
+          "policy:/": { "grant": ["READ","WRITE"], "revoke": [] },
+          "message:/": { "grant": ["READ","WRITE"], "revoke": [] }
+        }
+      },
+      "readonly": {
+        "subjects": { "nginx:viewer": { "type": "nginx-basic-auth" } },
+        "resources": {
+          "thing:/": { "grant": ["READ"], "revoke": [] }
+        }
+      }
+    }
+  },
+  "_mappingScript": {
+    "_comment": "Payload mapping for Eclipse Ditto — maps MQTT tank/telemetry to Ditto commands",
+    "incomingScript": "function mapToDittoProtocol(headers, textPayload, bytePayload, contentType) {\n  const p = JSON.parse(textPayload);\n  return {\n    thingId: 'ics:water-tank-TK-001',\n    policyId: 'ics:water-tank-policy',\n    topic: 'ics/water-tank-TK-001/things/twin/commands/modify',\n    path: '/features',\n    value: {\n      sensors: { properties: { status: { tankLevel: p.level, pressure_bar: p.pressure, temperature_C: p.temperature } } },\n      actuators: { properties: { status: { fillPump: p.fillPump, drainValve: p.drainValve } } },\n      alarms: { properties: { status: { alarmLowLevel: p.alarmLow, alarmHighLevel: p.alarmHigh } } },\n      setpoints: { properties: { desired: { setpoint: p.setpoint, mode: p.mode } } }\n    }\n  };\n}",
+    "outgoingScript": "function mapFromDittoProtocol(namespace, id, channel, criterion, action, path, dittoHeaders, value) {\n  if (path.startsWith('/features/setpoints/properties/desired')) {\n    return { topic: 'tank/commands/setpoint', textPayload: String(value.setpoint || 60) };\n  }\n  if (path.startsWith('/features/actuators')) {\n    if (value.mode === 'auto') return { topic: 'tank/commands/auto_mode', textPayload: 'true' };\n    return { topic: 'tank/commands/auto_mode', textPayload: 'false' };\n  }\n  return null;\n}"
+  }
+}
