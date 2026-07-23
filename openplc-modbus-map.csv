@@ -1,0 +1,16 @@
+Tag Name,Address,Data Type,Access,Description,Scale,Units
+FillPump,%QX0.0,BOOL,Read,Fill pump output (QX0.0 PompeRemplissage),1:1,
+DrainValve,%QX0.1,BOOL,Read,Drain valve output (QX0.1 VanneVidange),1:1,
+AlarmLowLevel,%QX0.2,BOOL,Read,Low level alarm (QX0.2 AlarmeNivBas),1:1,
+AlarmHighLevel,%QX0.3,BOOL,Read,High level alarm (QX0.3 AlarmeNivHaut),1:1,
+AutoModeOutput,%QX0.4,BOOL,Read,Auto mode active output (QX0.4 ModeAutoActifOut),1:1,
+CmdAutoMode,%QX1.0,BOOL,R/W,HMI auto mode command (Modbus Coil 8),1:1,
+CmdPumpManual,%QX1.1,BOOL,R/W,HMI manual pump command (Modbus Coil 9),1:1,
+CmdDrainManual,%QX1.2,BOOL,R/W,HMI manual drain command (Modbus Coil 10),1:1,
+CmdLevelReset,%QX1.3,BOOL,R/W,Reset level to 53% (Modbus Coil 11),1:1,
+CmdEStop,%QX1.4,BOOL,Write,Emergency stop (Modbus Coil 12),1:1,
+TankLevel,%QW0,INT,Read,Tank level 0-100% (x100 in Modbus = 0-10000),÷100,%
+Setpoint,%QW1,INT,R/W,Level setpoint (x100 in Modbus),÷100,%
+DeadBand,%QW2,INT,R/W,Dead band (x100 in Modbus),÷100,%
+Pressure,%QW3,INT,Read,Hydrostatic pressure mbar (x1000),÷1000,bar
+Temperature,%QW4,INT,Read,Water temperature (x10),÷10,°C
