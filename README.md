@@ -11,6 +11,7 @@ Developed as part of a CNC-funded research project at Universite de Sherbrooke, 
 partnership with Centris Technologies and Productique Quebec.
 
 ## Repository Structure
+
 ├── config/ Field-layer and digital-twin configuration
 │ ├── CuveRegulationAvancee.st Structured Text: tank regulation logic
 │ ├── ditto-nginx.conf Reverse proxy config for Eclipse Ditto
@@ -74,6 +75,7 @@ partnership with Centris Technologies and Productique Quebec.
 ├── .env.example Template for required environment variables
 ├── LICENSE
 └── README.md This file
+
 ## Quick Start (Full Containerized Environment)
 
 Requires Docker and Docker Compose.
