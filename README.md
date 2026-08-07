@@ -11,70 +11,62 @@ Developed as part of a CNC-funded research project at Universite de Sherbrooke, 
 partnership with Centris Technologies and Productique Quebec.
 
 ## Repository Structure
-
+```text
 ├── config/ Field-layer and digital-twin configuration
-│ ├── CuveRegulationAvancee.st Structured Text: tank regulation logic
-│ ├── ditto-nginx.conf Reverse proxy config for Eclipse Ditto
-│ ├── ditto.htpasswd Credential hash placeholder (not a live secret)
-│ ├── eclipse-ditto-thing.json Digital-twin thing definition
-│ ├── flows.json Node-RED flow export
-│ ├── ignition-tags.json Ignition SCADA tag configuration
-│ ├── kibana-index.ndjson Kibana index pattern export
-│ ├── openplc-modbus-map.csv Full Modbus register map
-│ └── sqlserver-schema.sql Historian database schema
+│   ├── CuveRegulationAvancee.st Structured Text: tank regulation logic
+│   ├── ditto-nginx.conf Reverse proxy config for Eclipse Ditto
+│   ├── ditto.htpasswd Credential hash placeholder (not a live secret)
+│   ├── eclipse-ditto-thing.json Digital-twin thing definition
+│   ├── flows.json Node-RED flow export
+│   ├── ignition-tags.json Ignition SCADA tag configuration
+│   ├── kibana-index.ndjson Kibana index pattern export
+│   ├── openplc-modbus-map.csv Full Modbus register map
+│   └── sqlserver-schema.sql Historian database schema
 │
 ├── scripts/ Attack, baseline, and detection scripts
-│ ├── attack_command_injection.py
-│ ├── attack_sensor_blinding_v3.py
-│ ├── attack_process_fatigue.py
-│ ├── attack_modbus_flooding.py
-│ ├── dos_phase4_attack.py Concurrent flood + safety-monitor experiment
-│ ├── safety_monitor.py Selective-logging DoS forensic monitor
-│ ├── detection_impact_realtime_final.py Command/telemetry discordance evaluator
-│ ├── scan_timing.py Baseline scan-cycle timing measurement
-│ ├── reset_cuve_cmds.py Resets HMI command coils between runs
-│ ├── generate_baseline_simple.py Baseline traffic generator (pump ON/OFF cycling)
-│ ├── prepare_baseline_normal.py Baseline preparation utility
-│ ├── prepare_baseline_target_63.py Baseline preparation utility (target level 63%)
-│ ├── plot_openplc.py Traffic/timing visualization
-│ ├── plot_normal_modbus.py Traffic/timing visualization
-│ ├── write_coil_attack_bridge.py Generic parameterized coil-write attack script
-│ └── archive/ Superseded script iterations, kept for reference
+│   ├── attack_command_injection.py
+│   ├── attack_sensor_blinding_v3.py
+│   ├── attack_process_fatigue.py
+│   ├── attack_modbus_flooding.py
+│   ├── dos_phase4_attack.py Concurrent flood + safety-monitor experiment
+│   ├── safety_monitor.py Selective-logging DoS forensic monitor
+│   ├── detection_impact_realtime_final.py Command/telemetry discordance evaluator
+│   ├── scan_timing.py Baseline scan-cycle timing measurement
+│   ├── reset_cuve_cmds.py Resets HMI command coils between runs
+│   ├── generate_baseline_simple.py Baseline traffic generator (pump ON/OFF cycling)
+│   ├── prepare_baseline_normal.py Baseline preparation utility
+│   ├── prepare_baseline_target_63.py Baseline preparation utility (target level 63%)
+│   ├── plot_openplc.py Traffic/timing visualization
+│   ├── plot_normal_modbus.py Traffic/timing visualization
+│   ├── write_coil_attack_bridge.py Generic parameterized coil-write attack script
+│   └── archive/ Superseded script iterations, kept for reference
 │
 ├── datasets/ Raw experimental data
-│ ├── thesis-results/ Data captured for this thesis (Chapter 5)
-│ └── prior-experiments/ Earlier team baseline/attack captures
+│   └── thesis-results/ Data captured for this thesis (Chapter 5)
+│       └── prior-experiments/ Earlier team baseline/attack captures
 │
 ├── pcaps/ Packet captures
-│ ├── thesis-results/ Captures used for Chapter 5 traffic analysis
-│ └── prior-experiments/ Earlier team packet captures
+│   └── thesis-results/ Captures used for Chapter 5 traffic analysis
+│       └── prior-experiments/ Earlier team packet captures
 │
 ├── docs/ Written results per attack (RESULTS_*.md)
-│ ├── RESULTS_command_injection.md
-│ ├── RESULTS_sensor_blinding.md
-│ ├── RESULTS_sensor_spoofing.md
-│ ├── RESULTS_process_fatigue.md
-│ ├── RESULTS_modbus_flooding.md
-│ ├── RESULTS_setpoint_modification.md
-│ ├── RESULTS_unauthenticated_api.md
-│ └── RESULTS_dos_forensic_experiment.md
+│   ├── RESULTS_command_injection.md
+│   ├── RESULTS_sensor_blinding.md
+│   ├── RESULTS_sensor_spoofing.md
+│   ├── RESULTS_process_fatigue.md
+│   ├── RESULTS_modbus_flooding.md
+│   ├── RESULTS_setpoint_modification.md
+│   ├── RESULTS_unauthenticated_api.md
+│   └── RESULTS_dos_forensic_experiment.md
 │
-├── replit_simulation/ics-water-tank-scada/
-│ Portable, dependency-light standalone reimplementation
-│ (Node.js; runs without Docker; see its own README)
-│
-├── src/ Optional VMware bridge gateway (gateway.js) --
-│ connects the standalone Replit server (see
-│ replit_simulation/) to local industrial protocol
-│ endpoints (Modbus, MQTT, REST, Elasticsearch, SQL
-│ Server) when run outside Docker. Not wired into the
-│ primary docker-compose.yml stack; see gateway.js
-│ header comments for configuration and usage.
+├── replit_simulation/ics-water-tank-scada/ Portable, dependency-light standalone reimplementation
+│   └── src/ Optional VMware bridge gateway (gateway.js)
 │
 ├── docker-compose.yml Full 17-service orchestration manifest
 ├── .env.example Template for required environment variables
 ├── LICENSE
 └── README.md This file
+```
 
 ## Quick Start (Full Containerized Environment)
 
