@@ -73,7 +73,7 @@ GET  /api/tank/config         connection info
 | 3       | pressure     | bar  | raw÷1000| R   |
 | 4       | temperature  | °C   | raw÷10  | R   |
 
-## VMware bridge files
+## Bridge files
 
 The `public/bridge/` folder contains integration files for:
 - **Node-RED** (`node-red-flow.json`)
