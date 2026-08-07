@@ -1,4 +1,10 @@
 from elasticsearch import Elasticsearch
+# NOTE: This script targets the original team network configuration
+# (192.168.6.156) and the original Elasticsearch index schema
+# (ics-process-pompe-*). This host is not reachable in the current
+# deployment. Thesis Chapter 5 results were captured against the
+# live schema (ics-process-state-* / ics-process-val-*) reachable
+# at localhost:9200 -- see the note in docs/RESULTS_command_injection.md.
 from datetime import datetime, timedelta, timezone
 import time
 
