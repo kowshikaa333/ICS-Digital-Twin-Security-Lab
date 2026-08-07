@@ -21,6 +21,10 @@ Then open **http://localhost:3000** in your browser.
 > MODBUS_PORT=5020 node server.js
 > ```
 
+## Screenshot
+
+![ICS Water Tank SCADA UI](public/screenshot.png)
+
 ## Services
 
 | Service       | Address                        | Protocol      |
