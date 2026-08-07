@@ -1,4 +1,4 @@
-# Unauthenticated API Access — Results
+﻿# Unauthenticated API Access -- Results
 
 ## Attack
 - Plain unauthenticated GET request: http://localhost:1880/flows
@@ -9,9 +9,14 @@
 - Disclosed: Modbus target hostnames/ports (e.g. openplc1:502), flow tab names/labels,
   complete tag-decoding and command-building logic (per Appendix D)
 - Total flow nodes disclosed: 107
-- Modbus targets exposed: OpenPLC1 -> openplc1:502; OpenPLC2_Cuve -> 192.168.6.156:5022; unnamed target -> 192.168.6.156:5021
+- Modbus targets exposed: OpenPLC1 -> openplc1:502; OpenPLC2_Cuve -> <internal-ip-redacted>:5022;
+  unnamed target -> <internal-ip-redacted>:5021
 - Flow tabs exposed: "Cuve", "ICS Water Tank SCADA"
-- Note: disclosure includes real internal network IP (192.168.6.156), not just Docker service hostnames -- reveals actual network topology beyond container-internal naming
+- Note: disclosure includes a real internal network IP address, not just Docker service
+  hostnames -- reveals actual network topology beyond container-internal naming. The specific
+  address is redacted in this public document since it corresponds to live infrastructure;
+  the finding itself (real IP disclosure via an unauthenticated endpoint) is the reportable
+  result, not the address value.
 
 ## Significance
 Confirms Section 5.2.7 / Technique T0871. Produces no direct physical process consequence,
