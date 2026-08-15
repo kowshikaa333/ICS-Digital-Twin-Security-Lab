@@ -8,9 +8,7 @@ CmdAutoMode,%QX1.0,BOOL,R/W,HMI auto mode command (Modbus Coil 8),1:1,
 CmdPumpManual,%QX1.1,BOOL,R/W,HMI manual pump command (Modbus Coil 9),1:1,
 CmdDrainManual,%QX1.2,BOOL,R/W,HMI manual drain command (Modbus Coil 10),1:1,
 CmdLevelReset,%QX1.3,BOOL,R/W,Reset level to 53% (Modbus Coil 11),1:1,
-CmdEStop,%QX1.4,BOOL,Write,Emergency stop (Modbus Coil 12),1:1,
-TankLevel,%QW0,INT,Read,Tank level 0-100% (x100 in Modbus = 0-10000),÷100,%
-Setpoint,%QW1,INT,R/W,Level setpoint (x100 in Modbus),÷100,%
-DeadBand,%QW2,INT,R/W,Dead band (x100 in Modbus),÷100,%
+TankLevel,%QW0,INT,Read,Tank level 0-100 direct integer (REAL_TO_INT(NiveauSimu) no scaling),1:1,%
+Setpoint,%QW1,INT,R/W,Level setpoint 0-100 direct integer (REAL_TO_INT(ConsigneNiveau) no scaling),1:1,%
 Pressure,%QW3,INT,Read,Hydrostatic pressure mbar (x1000),÷1000,bar
 Temperature,%QW4,INT,Read,Water temperature (x10),÷10,°C
