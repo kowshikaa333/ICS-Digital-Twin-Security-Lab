@@ -12,7 +12,7 @@
 
 ## Significance
 Confirms Section 5.2.4 hypothesis: the tank level remained within a narrow, entirely
-normal-looking band (49-55) throughout the attack -- never approaching either the
+normal-looking band (49-55) throughout the attack never approaching either the
 10% low or 95%/90% high alarm thresholds. A simple level-threshold alarm would report
 zero anomalies. The actual abnormality is invisible at the process-value level and
 exists only in actuator toggle frequency (3.28 Hz, versus a legitimate AUTO-mode
