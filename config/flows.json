@@ -1,0 +1,66 @@
+[
+    {
+        "id": "7baa08a3c9860163",
+        "type": "modbus-write",
+        "z": "98811ba0c069e3a4",
+        "name": "Write Single Coil (FC5)",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "showWarnings": true,
+        "unitid": "0",
+        "dataType": "Coil",
+        "adr": "0",
+        "quantity": "1",
+        "server": "22ebc0fdc2377ba0",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 720,
+        "y": 420,
+        "wires": [
+            [
+                "590c200c3022dd51"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "22ebc0fdc2377ba0",
+        "type": "modbus-client",
+        "name": "OpenPLC1",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "34.9.68.128",
+        "tcpPort": "15021",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": 9600,
+        "serialDatabits": 8,
+        "serialStopbits": 1,
+        "serialParity": "none",
+        "serialConnectionDelay": 100,
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 0,
+        "commandDelay": 1,
+        "clientTimeout": 1000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true,
+        "showErrors": false,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "f1e8f4749dccd3e7",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-contrib-modbus": "5.45.2"
+        }
+    }
+]
