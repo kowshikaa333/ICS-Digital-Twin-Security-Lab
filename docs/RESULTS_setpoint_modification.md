@@ -2,13 +2,13 @@
 
 ## Attempt 1: Register-level access (lower capability tier)
 - Target: ConsigneSortie (holding register 1)
-- Action: write_register(1, 80) -- attempt to shift setpoint from 60 to 80
+- Action: write_register(1, 80) attempt to shift setpoint from 60 to 80
 - Result: Write succeeded at protocol level (no Modbus exception), but value reverted
   to 60 on next read (1 second later)
 - Conclusion: ConsigneSortie is a PLC OUTPUT register (ConsigneSortie := REAL_TO_INT(
   ConsigneNiveau) executed every scan), not an input the control logic reads from.
   Raw Modbus writes to this register are silently overwritten by the next 100ms scan
-  cycle -- the identical structural pattern observed during the Sensor Blinding attempt
+  cycle the identical structural pattern observed during the Sensor Blinding attempt
   on NiveauCuveSortie (register 0).
 
 ## Significance
@@ -19,7 +19,7 @@ only their computed OUTPUT is exposed. This is a genuine, empirically-confirmed 
 property of this specific implementation, not merely a theoretical claim: an attacker with
 only network-level Modbus write access, and no engineering-workstation access, cannot shift
 the setpoint via this vector. Achieving true setpoint modification requires the higher
-capability tier -- direct ST program reprogramming via the OpenPLC web editor -- confirming
+capability tier direct ST program reprogramming via the OpenPLC web editor confirming
 Section 5.2.6's framing that register-level and engineering-access-level attacks represent
 meaningfully different, non-equivalent threat tiers.
 
