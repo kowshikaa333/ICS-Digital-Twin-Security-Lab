@@ -44,7 +44,7 @@ Licensed under **Apache License 2.0** -- see [`LICENSE`](./LICENSE).
 │   ├── openplc-modbus-map.csv       Full Modbus register map
 │   └── sqlserver-schema.sql         Historian database schema
 │
-├── scripts/                         Attack, baseline, and detection scripts
+├── scripts/                         Attack, baseline and detection scripts
 │   ├── attack_command_injection.py
 │   ├── attack_sensor_blinding_v3.py
 │   ├── attack_process_fatigue.py
@@ -114,13 +114,13 @@ Bring-up follows a four-stage sequence: field layer (OpenPLC) -> digital twin (E
 
 ## Python Dependencies
 
-The attack, baseline-generation, and analysis scripts in `scripts/` require Python 3.10+ and the packages listed in [`requirements.txt`](./requirements.txt):
+The attack, baseline-generation and analysis scripts in `scripts/` require Python 3.10+ and the packages listed in [`requirements.txt`](./requirements.txt):
 
 ```bash
 pip install -r requirements.txt
 ```
 
-This installs `pymodbus` (Modbus TCP client, used by every attack script), `pandas` and `matplotlib` (traffic-capture analysis and visualization), `scipy` (baseline statistical comparison -- Shapiro-Wilk normality testing, Mann-Whitney U testing), and `elasticsearch` (the Python client used to query command/telemetry indices for discordance detection).
+This installs `pymodbus` (Modbus TCP client, used by every attack script), `pandas` and `matplotlib` (traffic-capture analysis and visualization), `scipy` (baseline statistical comparison -- Shapiro-Wilk normality testing, Mann-Whitney U testing) and `elasticsearch` (the Python client used to query command/telemetry indices for discordance detection).
 
 ## Attack Scenarios
 
@@ -171,7 +171,7 @@ A five-phase Denial-of-Service forensic-readiness experiment (`scripts/dos_phase
 
 ## Portable Standalone Demo
 
-`replit_simulation/ics-water-tank-scada/` is a single-file Node.js reimplementation of the tank control logic requiring no Docker or container orchestration exposes Modbus TCP, an embedded MQTT broker, a REST API, and a WebSocket from one process. Behaviorally equivalent to the deployed Structured Text program (identical setpoint, deadband, fill/drain rates, and safety cutoffs), with one deliberate addition: a directly-triggerable emergency-stop coil.
+`replit_simulation/ics-water-tank-scada/` is a single-file Node.js reimplementation of the tank control logic requiring no Docker or container orchestration exposes Modbus TCP, an embedded MQTT broker, a REST API and a WebSocket from one process. Behaviorally equivalent to the deployed Structured Text program (identical setpoint, deadband, fill/drain rates and safety cutoffs), with one deliberate addition: a directly-triggerable emergency-stop coil.
 
 ```bash
 cd replit_simulation/ics-water-tank-scada
@@ -187,11 +187,11 @@ Then open http://localhost:3000.
 
 ## Security Note
 
-This environment is a deliberately vulnerable research testbed and is **not intended for production use**. Default credentials, unauthenticated Modbus TCP, and disabled TLS are used throughout by design, to faithfully reproduce real-world ICS attack surfaces. Do not expose any service in this repository to an untrusted network.
+This environment is a deliberately vulnerable research testbed and is **not intended for production use**. Default credentials, unauthenticated Modbus TCP and disabled TLS are used throughout by design, to faithfully reproduce real-world ICS attack surfaces. Do not expose any service in this repository to an untrusted network.
 
 ## Documentation
 
-Full methodology, architecture rationale, and experimental protocol are documented in the accompanying master's thesis, *Cybersecurity Assessment Framework for Pre-Deployment of ICS Digital Twins Using ControlTwin* (Université de Sherbrooke, 2025-2026).
+Full methodology, architecture rationale and experimental protocol are documented in the accompanying master's thesis, *Cybersecurity Assessment Framework for Pre-Deployment of ICS Digital Twins Using ControlTwin* (Université de Sherbrooke, 2025-2026).
 
 <!-- ## Citing This Work
 
@@ -208,4 +208,4 @@ If this repository supports your research, please cite the accompanying thesis:
 
 ## Contributors
 
-Developed collaboratively as part of an NCC/CNC-funded research team. Individual thesis contributions -- experimental protocol design, attack execution, and forensic-readiness evaluation -- are detailed in the thesis's Statement of Individual Contribution.  -->
+Developed collaboratively as part of an NCC/CNC-funded research team. Individual thesis contributions -- experimental protocol design, attack execution and forensic-readiness evaluation -- are detailed in the thesis's Statement of Individual Contribution.  -->
