@@ -1,4 +1,4 @@
-﻿# Unauthenticated API Access -- Results
+﻿# Unauthenticated API Access Results
 
 ## Attack
 - Plain unauthenticated GET request: http://localhost:1880/flows
@@ -13,7 +13,7 @@
   unnamed target -> <internal-ip-redacted>:5021
 - Flow tabs exposed: "Cuve", "ICS Water Tank SCADA"
 - Note: disclosure includes a real internal network IP address, not just Docker service
-  hostnames -- reveals actual network topology beyond container-internal naming. The specific
+  hostnames reveals actual network topology beyond container-internal naming. The specific
   address is redacted in this public document since it corresponds to live infrastructure;
   the finding itself (real IP disclosure via an unauthenticated endpoint) is the reportable
   result, not the address value.
