@@ -1,4 +1,4 @@
-﻿# DoS Forensic-Readiness Experiment -- Results
+﻿# DoS Forensic-Readiness Experiment Results
 
 ## Phase 1: Baseline (60s, no attack)
 - Total polls: 297, Alerts: 0, Errors: 0
@@ -34,7 +34,7 @@ connection-level contention, a controlled comparison was run:
 
 This isolated test confirms the root cause precisely: openplc1's Modbus TCP server
 implementation reliably serves exactly ONE concurrent client connection, but fails almost
-immediately upon a second simultaneous connection being opened -- independent of request
+immediately upon a second simultaneous connection being opened independent of request
 rate or flooding volume. This is a more precise and more severe finding than a rate-based
 DoS: it is a connection-multiplexing limitation in the field-layer controller's Modbus
 server itself.
@@ -42,7 +42,7 @@ server itself.
 ## Success Criteria Evaluation
 1. Evidence-capture completeness: FAILED. Only 6 of ~300 expected polls succeeded (~2% capture rate)
 2. Logging completes before crash: PARTIALLY MET. No crash occurred, but near-total capture failure
-   makes this distinction largely moot -- there was almost nothing to complete logging of.
+   makes this distinction largely moot there was almost nothing to complete logging of.
 3. Low performance overhead: NOT MEASURABLE. Insufficient successful samples exist to compute a
    valid latency comparison against baseline.
 4. Timeline reconstructable from logs: FAILED. With only 6 data points (5 of which are error
@@ -52,8 +52,8 @@ server itself.
 
 This result is more severe than the thesis's original framing anticipated (which expected
 measurable but bounded latency/traffic degradation, per the main-stack flooding attack
-result: +28% latency, +213% jitter). Under concurrent connection contention -- two
-independent Modbus TCP clients simultaneously targeting the same OpenPLC instance -- the
+result: +28% latency, +213% jitter). Under concurrent connection contention two
+independent Modbus TCP clients simultaneously targeting the same OpenPLC instance the
 controller's Modbus stack exhibited near-total request failure rather than graceful
 degradation, evidenced by transaction ID desynchronization errors on both connections.
 
@@ -63,7 +63,7 @@ resource (the Modbus TCP connection to the controller) can become the first casu
 exactly the class of attack (resource exhaustion) it is meant to help detect. Unlike the
 main-stack Modbus Flooding result (Section 5.2.5), which used a single flooding connection
 against a controller answering a separate, less-contended polling client, this experiment's
-design -- two concurrent, independently-connecting clients -- surfaces a more acute failure
+design two concurrent, independently-connecting clients surfaces a more acute failure
 mode: connection-level contention causing near-complete data capture failure, rather than
 merely elevated latency.
 
@@ -71,7 +71,7 @@ This materially sharpens the thesis's forensic-readiness argument: any external
 monitoring/logging client (a safety monitor, a SCADA poller, a forensic evidence collector)
 that opens its own Modbus connection to a controller which is simultaneously being polled by
 any other legitimate client (e.g., Node-RED's own supervisory polling) will itself trigger
-this same failure mode -- with no attacker involvement required at all. This suggests the
+this same failure mode with no attacker involvement required at all. This suggests the
 safe architectural pattern for a forensic monitor is either (a) sharing a single
 connection/polling loop with the existing supervisory client rather than opening an
 independent connection, or (b) reading process state via the historian/digital-twin layer
