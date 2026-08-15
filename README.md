@@ -23,8 +23,8 @@ Licensed under **Apache License 2.0** -- see [`LICENSE`](./LICENSE).
 - [Data Availability Note](#data-availability-note)
 - [Security Note](#security-note)
 - [Documentation](#documentation)
-- [Citing This Work](#citing-this-work)
-- [Contributors](#contributors)
+<!-- - [Citing This Work](#citing-this-work)
+- [Contributors](#contributors)-->
 
 ## Architecture
 
