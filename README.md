@@ -8,7 +8,7 @@ A reproducible, forensically-instrumented sandbox for pre-deployment security as
 
 Developed as part of a research project funded by the National Cybersecurity Consortium (NCC) / Consortium national de cybersécurité (CNC) at Université de Sherbrooke, in partnership with Centris Technologies, Neverhack and Productique Québec.
 
-Licensed under **Apache License 2.0** -- see [`LICENSE`](./LICENSE).
+Licensed under **Apache License 2.0** - see [`LICENSE`](./LICENSE).
 
 ## Table of Contents
 
