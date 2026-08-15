@@ -4,9 +4,9 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Docker Compose](https://img.shields.io/badge/deployment-Docker%20Compose-2496ED)
 
-A reproducible, forensically-instrumented sandbox for pre-deployment security assessment of Industrial Control Systems (ICS). ControlTwin combines containerized OpenPLC field controllers, an IEC 62443-zone-aligned network topology, and an Eclipse Ditto digital-twin layer to stage MITRE ATT&CK for ICS techniques against live water-treatment and conveyor processes, measuring their physical and forensic consequences empirically rather than theoretically.
+A reproducible, forensically-instrumented sandbox for pre-deployment security assessment of Industrial Control Systems (ICS). ControlTwin combines containerized OpenPLC field controllers, an IEC 62443-zone-aligned network topology and an Eclipse Ditto digital-twin layer to stage MITRE ATT&CK for ICS techniques against live water-treatment and conveyor processes, measuring their physical and forensic consequences empirically rather than theoretically.
 
-Developed as part of a research project funded by the National Cybersecurity Consortium (NCC) / Consortium national de cybersécurité (CNC) at Université de Sherbrooke, in partnership with Centris Technologies, Neverhack, and Productique Québec.
+Developed as part of a research project funded by the National Cybersecurity Consortium (NCC) / Consortium national de cybersécurité (CNC) at Université de Sherbrooke, in partnership with Centris Technologies, Neverhack and Productique Québec.
 
 Licensed under **Apache License 2.0** -- see [`LICENSE`](./LICENSE).
 
@@ -29,8 +29,6 @@ Licensed under **Apache License 2.0** -- see [`LICENSE`](./LICENSE).
 ## Architecture
 
 ![ControlTwin five-zone architecture](docs/Architecture.png)
-
-Five zones following an ISA-95/IEC 62443-style segmentation. Solid boxes are live in the current deployment; dashed boxes are planned but not yet built. Full architectural rationale, including which specific services are confirmed live versus aspirational, is in the accompanying thesis, Chapter 4.
 
 ## Repository Structure
 
@@ -126,7 +124,7 @@ This installs `pymodbus` (Modbus TCP client, used by every attack script), `pand
 
 ## Attack Scenarios
 
-Seven staged attacks, mapped to MITRE ATT&CK for ICS techniques, are implemented in `scripts/`. Each attack's real, measured results are documented in the corresponding `docs/RESULTS_*.md` file.
+Seven staged attacks, mapped to MITRE ATT&CK for ICS techniques are implemented in `scripts/`. Each attack's real, measured results are documented in the corresponding `docs/RESULTS_*.md` file.
 
 | Attack | Technique | Result Summary | Details |
 |---|---|---|---|
@@ -165,15 +163,15 @@ Every result above can be regenerated from a clean environment:
    python scripts/plot_openplc.py
    ```
 
-The exact parameters, thresholds, and expected output for each specific attack are documented in that attack's `docs/RESULTS_*.md` file.
+The exact parameters, thresholds and expected output for each specific attack are documented in that attack's `docs/RESULTS_*.md` file.
 
 ## Forensic-Readiness Experiment
 
-A five-phase Denial-of-Service forensic-readiness experiment (`scripts/dos_phase4_attack.py`, `scripts/safety_monitor.py`) demonstrates that a monitoring process sharing a Modbus connection with an attacker can itself become the first casualty of a DoS attack -- evidence-capture completeness collapsed to approximately 2% under concurrent connection contention. Root cause: this specific OpenPLC instance's Modbus TCP server reliably serves exactly one concurrent connection but fails almost immediately upon a second. Full results in [`docs/RESULTS_dos_forensic_experiment.md`](docs/RESULTS_dos_forensic_experiment.md).
+A five-phase Denial-of-Service forensic-readiness experiment (`scripts/dos_phase4_attack.py`, `scripts/safety_monitor.py`) demonstrates that a monitoring process sharing a Modbus connection with an attacker can itself become the first casualty of a DoS attack, evidence-capture completeness collapsed to approximately 2% under concurrent connection contention. Root cause: this specific OpenPLC instance's Modbus TCP server reliably serves exactly one concurrent connection but fails almost immediately upon a second. Full results in [`docs/RESULTS_dos_forensic_experiment.md`](docs/RESULTS_dos_forensic_experiment.md).
 
 ## Portable Standalone Demo
 
-`replit_simulation/ics-water-tank-scada/` is a single-file Node.js reimplementation of the tank control logic requiring no Docker or container orchestration -- exposes Modbus TCP, an embedded MQTT broker, a REST API, and a WebSocket from one process. Behaviorally equivalent to the deployed Structured Text program (identical setpoint, deadband, fill/drain rates, and safety cutoffs), with one deliberate addition: a directly-triggerable emergency-stop coil.
+`replit_simulation/ics-water-tank-scada/` is a single-file Node.js reimplementation of the tank control logic requiring no Docker or container orchestration exposes Modbus TCP, an embedded MQTT broker, a REST API, and a WebSocket from one process. Behaviorally equivalent to the deployed Structured Text program (identical setpoint, deadband, fill/drain rates, and safety cutoffs), with one deliberate addition: a directly-triggerable emergency-stop coil.
 
 ```bash
 cd replit_simulation/ics-water-tank-scada
@@ -195,7 +193,7 @@ This environment is a deliberately vulnerable research testbed and is **not inte
 
 Full methodology, architecture rationale, and experimental protocol are documented in the accompanying master's thesis, *Cybersecurity Assessment Framework for Pre-Deployment of ICS Digital Twins Using ControlTwin* (Université de Sherbrooke, 2025-2026).
 
-## Citing This Work
+<!-- ## Citing This Work
 
 If this repository supports your research, please cite the accompanying thesis:
 
@@ -210,4 +208,4 @@ If this repository supports your research, please cite the accompanying thesis:
 
 ## Contributors
 
-Developed collaboratively as part of an NCC/CNC-funded research team. Individual thesis contributions -- experimental protocol design, attack execution, and forensic-readiness evaluation -- are detailed in the thesis's Statement of Individual Contribution.
+Developed collaboratively as part of an NCC/CNC-funded research team. Individual thesis contributions -- experimental protocol design, attack execution, and forensic-readiness evaluation -- are detailed in the thesis's Statement of Individual Contribution.  -->
