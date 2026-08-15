@@ -1,0 +1,17 @@
+# ControlTwin -- Python dependencies for scripts/
+#
+# Confirmed usage across this repository:
+#   pymodbus      -- attack_*.py, write_coil_attack_bridge.py (Modbus TCP client)
+#   pandas        -- plot_openplc.py, plot_normal_modbus.py (traffic-capture analysis)
+#   matplotlib    -- plot_openplc.py, plot_normal_modbus.py (visualization)
+#   scipy         -- baseline comparison statistics (Shapiro-Wilk, Mann-Whitney U; Ch.5)
+#   elasticsearch -- detection_impact_realtime_final.py (command/telemetry discordance queries)
+#
+# Install with:
+#   pip install -r requirements.txt
+
+pymodbus>=3.6
+pandas>=2.0
+matplotlib>=3.8
+scipy>=1.11
+elasticsearch>=8.11
