@@ -9,7 +9,7 @@
 - Total requests generated: 50,215 (772.5 req/sec)
 - Packets captured (tcpdump, bidirectional): 126,671+ during flood window
 - Baseline traffic (ordinary cycling): mean 156.53 bytes/sec client->PLC (Section 5.1.3)
-  -- flood represents an enormous, unambiguous deviation from baseline traffic volume
+  flood represents an enormous, unambiguous deviation from baseline traffic volume
 
 ## Scan-Cycle Timing Impact
 - Baseline: mean=1.903ms, stdev=1.085ms
