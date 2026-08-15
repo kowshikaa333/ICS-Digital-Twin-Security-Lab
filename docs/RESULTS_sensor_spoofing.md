@@ -20,7 +20,7 @@ The alarm logic (AlarmeNivHaut := (NiveauSimu >= 90.0) OR CapteurNiveauHaut) con
 TWO independent triggering conditions joined by OR: a level-value-based check and a
 sensor-based check. The spoofing attack successfully and completely defeated the
 sensor-based half of this condition (confirmed: CapteurNiveauHaut contributed FALSE
-throughout, as designed) -- but the alarm still fired via the INDEPENDENT level-value
+throughout, as designed) but the alarm still fired via the INDEPENDENT level-value
 check, which reads NiveauSimu directly and is unaffected by sensor-level spoofing.
 
 This is a genuine, unanticipated finding beyond the thesis's original hypothesis
@@ -37,4 +37,4 @@ spoofing the PROCESS VALUE the control logic derives its own decisions from.
 
 The 95% safety cutoff (pump forced off) fired correctly and independently of both the
 sensor spoof and the alarm state, confirming this safety interlock is architecturally
-separate from the alarm-reporting logic -- exactly as designed.
+separate from the alarm-reporting logic exactly as designed.
