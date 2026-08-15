@@ -17,8 +17,8 @@
 - Telemetry entries (ics-process-state-*) during window: 500 (correctly captured pompe flip to True)
 - Finding: Attack bypassed HMI/command layer entirely (raw Modbus write), so command-vs-telemetry
   discordance detector has no legitimate command entry to compare against. Discordance score is
-  effectively undefined/zero -- not because the attack is invisible in telemetry, but because
+  effectively undefined/zero not because the attack is invisible in telemetry, but because
   there is no command-side baseline to flag a mismatch against. This refines the thesis's original
-  hypothesis (Section 5.3) that Command Injection would be "most likely caught quickly" -- direct
+  hypothesis (Section 5.3) that Command Injection would be "most likely caught quickly" direct
   Modbus writes bypassing HMI/API layers are structurally invisible to this specific detector design,
   regardless of severity.
