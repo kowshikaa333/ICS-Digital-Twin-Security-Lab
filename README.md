@@ -114,7 +114,7 @@ Bring-up follows a four-stage sequence: field layer (OpenPLC) -> digital twin (E
 
 ## Python Dependencies
 
-The attack, baseline-generation and analysis scripts in `scripts/` require Python 3.10+ and the packages listed in [`requirements.txt`](./requirements.txt):
+The attack, baseline-generation and analysis scripts in `scripts/` require Python 3.10+ and the packages listed in [Requirements File](docs/requirements.txt):
 
 ```bash
 pip install -r requirements.txt
