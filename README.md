@@ -28,7 +28,7 @@ Licensed under **Apache License 2.0** -- see [`LICENSE`](./LICENSE).
 
 ## Architecture
 
-![ControlTwin five-zone architecture](docs/images/architecture-five-zone.png)
+![ControlTwin five-zone architecture](docs/Architecture.png)
 
 Five zones following an ISA-95/IEC 62443-style segmentation. Solid boxes are live in the current deployment; dashed boxes are planned but not yet built. Full architectural rationale, including which specific services are confirmed live versus aspirational, is in the accompanying thesis, Chapter 4.
 
@@ -132,7 +132,7 @@ Seven staged attacks, mapped to MITRE ATT&CK for ICS techniques, are implemented
 |---|---|---|---|
 | Command Injection | T0855 | 53%->95% in ~85s; discordance detector structurally blind (bypasses command-logging layer) | [RESULTS](docs/RESULTS_command_injection.md) |
 | Sensor Blinding | T0821 | 41-point divergence between true and reported state, undetected for full attack duration | [RESULTS](docs/RESULTS_sensor_blinding.md) |
-| Process Fatigue | -- | 3.28 Hz actuator toggling invisible to threshold-based alarms | [RESULTS](docs/RESULTS_process_fatigue.md) |
+| Process Fatigue | T0802 | 3.28 Hz actuator toggling invisible to threshold-based alarms | [RESULTS](docs/RESULTS_process_fatigue.md) |
 | Modbus Flooding | T0814 | +28.3% mean latency, +213.4% jitter (Mann-Whitney U, p=0.000477) | [RESULTS](docs/RESULTS_modbus_flooding.md) |
 | Setpoint Modification | T0836 | Register-level write fails silently; engineering-access-level edit succeeds | [RESULTS](docs/RESULTS_setpoint_modification.md) |
 | Sensor Spoofing | T0856 | Partial detection gap; redundant alarm logic limits full effectiveness | [RESULTS](docs/RESULTS_sensor_spoofing.md) |
